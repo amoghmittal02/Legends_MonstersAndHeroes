@@ -13,6 +13,11 @@ public abstract class Hero extends Character {
         this.gold = gold;
     }
 
+    public void displayStats() {
+        super.displayStats(); // Call the Character's displayStats method for common stats
+        System.out.println("Gold: " + getGold()); // Add Hero-specific gold information
+    }
+
     public int getMana() {
         return mana;
     }

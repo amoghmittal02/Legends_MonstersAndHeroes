@@ -33,7 +33,9 @@ abstract class Character {
     public abstract void useSpecialAbility();
 
     public void displayStats() {
-        System.out.println(name + " - Level: " + level + ", Health: " + health + "/" + maxHealth + ", Mana: " + mana + "/" + maxMana + ", Strength: " + strength + ", Dexterity: " + dexterity + ", Agility: " + agility + ", Gold: " + gold);
+       // System.out.println(name + " - Level: " + level + ", Health: " + health + "/" + maxHealth + ", Mana: " + mana + "/" + maxMana + ", Strength: " + strength + ", Dexterity: " + dexterity + ", Agility: " + agility + ", Gold: " + gold);
+        System.out.println(name + " - Level: " + level + ", Health: " + health + "/" + maxHealth + ", Mana: " + mana + "/" + maxMana + ", Strength: " + strength + ", Dexterity: " + dexterity + ", Agility: " + agility);
+
     }
 
     public String getName() {

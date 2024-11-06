@@ -193,16 +193,35 @@ public class Battle {
                 Hero target = selectRandomHero();
                 if (target != null) {
                     System.out.println(RED_TEXT + monster.getName() + " attacks " + target.getName() + "!" + RESET_TEXT);
+//                    for (int i = 0; i < heroes.size(); i++) {
+//                        Hero hero = heroes.get(i);
+//                        if (hero.isAlive()) {
+//                            System.out.println((i + 1) + ". " + hero.getName() + " (HP: " + hero.getHealth() + ")");
+//                        }
+//                    }
 
                     // Check if the hero dodges the attack
                     if (target.dodge()) {
                         System.out.println(GREEN_TEXT + target.getName() + " dodged the attack!" + RESET_TEXT);
+                        for (int i = 0; i < heroes.size(); i++) {
+                            Hero hero = heroes.get(i);
+                            if (hero.isAlive()) {
+                                System.out.println((i + 1) + ". " + hero.getName() + " (HP: " + hero.getHealth() + ")");
+                            }
+                        }
                     } else {
                         // Calculate damage and apply it to the hero
                         int damage = monster.getBaseDamage() - target.getDefense();
                         damage = Math.max(damage, 0); // Ensure damage is not negative
                         target.takeDamage(damage);
+
                         System.out.println(RED_TEXT + target.getName() + " takes " + damage + " damage from " + monster.getName() + "!" + RESET_TEXT);
+                        for (int i = 0; i < heroes.size(); i++) {
+                            Hero hero = heroes.get(i);
+                            if (hero.isAlive()) {
+                                System.out.println((i + 1) + ". " + hero.getName() + " (HP: " + hero.getHealth() + ")");
+                            }
+                        }
 
                         if (!target.isAlive()) {
                             System.out.println(RED_TEXT + target.getName() + " has been defeated!" + RESET_TEXT);

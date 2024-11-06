@@ -72,20 +72,26 @@ public class Game {
 
     private void enterMarket(Hero hero) {
         Market market = new Market();
-        market.displayItems();
+        market.displayItemsForSale();
         System.out.println("Buy or Sell? (B/S): ");
         char choice = scanner.next().charAt(0);
 
-        if (choice == 'B' || choice == 'b') {
-            System.out.println("Choose item to buy:");
-            int itemIndex = scanner.nextInt() - 1;
-            if (market.buyItem(hero, itemIndex)) {
-                System.out.println("Item bought successfully!");
+//        if (choice == 'B' || choice == 'b') {
+//            System.out.println("Choose item to buy:");
+//            int itemIndex = scanner.nextInt() - 1;
+//            if (market.buyItem(hero, itemIndex)) {
+//                System.out.println("Item bought successfully!");
+//            } else {
+//                System.out.println("Cannot buy item.");
+//            }
+            if (choice == 'B' || choice == 'b') {
+                market.buyItem(hero);
+            } else if (choice == 'S' || choice == 's') {
+                market.sellItem(hero);
             } else {
-                System.out.println("Cannot buy item.");
+                System.out.println("Market action canceled.");
             }
         }
-    }
 
     private void startBattle() {
         Battle battle = new Battle(heroes, world.createMonsters(heroes.size()));
