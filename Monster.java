@@ -45,5 +45,7 @@ public abstract class Monster extends Character {
     public double getDodgeChance() {
         return dodgeChance;
     }
+
+    public int getLevel() {return level;}
 }
 

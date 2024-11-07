@@ -1,5 +1,5 @@
 class Potion extends Item {
-    public enum PotionType { HEALTH, MANA, STRENGTH, DEXTERITY, AGILITY }
+    public enum PotionType { HEALTH, MANA, STRENGTH, DEXTERITY, AGILITY, MULTI }
     private int effect;
     private PotionType type;
 

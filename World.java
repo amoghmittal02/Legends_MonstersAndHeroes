@@ -17,12 +17,27 @@ public class World {
     private static final String YELLOW_TEXT = "\u001B[33m";
     private static final String BLUE_TEXT = "\u001B[34m";
 
+    public static final int MIN_SIZE = 3;
+    public static final int MAX_SIZE = 10;
+
     public World(int size) {
+        if (size < MIN_SIZE || size > MAX_SIZE) {
+            throw new IllegalArgumentException(
+                    "World size must be between " + MIN_SIZE + " and " + MAX_SIZE
+            );
+        }
         this.size = size;
         grid = new int[size][size];
         heroPosition = new int[] {0, 0};
         generateWorld();
     }
+
+//    public World(int size) {
+//        this.size = size;
+//        grid = new int[size][size];
+//        heroPosition = new int[] {0, 0};
+//        generateWorld();
+//    }
 
     public boolean isHeroOnMarketTile() {
         int x = heroPosition[0];
@@ -52,14 +67,14 @@ public class World {
             // Randomly create different types of monsters
             switch (random.nextInt(3)) {
                 case 0:
-                    monster = new Dragon("Dragon", level);
+                    monster = new Dragon("Dragon", level, 300, 400, 35);
                     break;
                 case 1:
-                    monster = new Exoskeleton("Exoskeleton", level);
+                    monster = new Exoskeleton("Exoskeleton", level, 700, 800, 75);
                     break;
                 case 2:
                 default:
-                    monster = new Spirit("Spirit", level);
+                    monster = new Spirit("Spirit", 2, 600, 500, level);
                     break;
             }
             monsters.add(monster);
@@ -90,56 +105,25 @@ public class World {
         }
     }
 
-
-//    public void moveHero(char direction) {
-//        // Move logic with bounds check and tile type handling
-//    }
-//
-//public boolean moveHero(char direction) {
-//    int newX = heroPosition[0];
-//    int newY = heroPosition[1];
-//
-//    // Convert the direction to uppercase to handle both uppercase and lowercase inputs
-//    switch (Character.direction) {
-//        case 'W': newX--; break; // Move up
-//        case 'S': newX++; break; // Move down
-//        case 'A': newY--; break; // Move left
-//        case 'D': newY++; break; // Move right
-//        default:
-//            System.out.println("Invalid move. Use W, A, S, or D.");
-//            return false;
-//    }
-//
-//    // Check if new position is within bounds and accessible
-//    if (isWithinBounds(newX, newY) && grid[newX][newY] != INACCESSIBLE) {
-//        heroPosition[0] = newX;
-//        heroPosition[1] = newY;
-//        return true;
-//    } else {
-//        System.out.println("Cannot move in that direction. It's inaccessible.");
-//        return false;
-//    }
-//}
 public boolean moveHero(char direction) {
     int newX = heroPosition[0];
     int newY = heroPosition[1];
 
-    // Print debug information
+
     System.out.println("Current Position: (" + newX + ", " + newY + ")");
     System.out.println("Received Direction: " + direction);
 
-    // Convert direction to uppercase
     switch (Character.toUpperCase(direction)) {
-        case 'W': newX--; break; // Move up
-        case 'S': newX++; break; // Move down
-        case 'A': newY--; break; // Move left
-        case 'D': newY++; break; // Move right
+        case 'W': newX--; break; // Up
+        case 'S': newX++; break; // Down
+        case 'A': newY--; break; // Left
+        case 'D': newY++; break; // Right
         default:
             System.out.println("Invalid move. Use W, A, S, or D.");
             return false;
     }
 
-    // Check if new position is within bounds and accessible
+
     if (isWithinBounds(newX, newY) && grid[newX][newY] != INACCESSIBLE) {
         heroPosition[0] = newX;
         heroPosition[1] = newY;

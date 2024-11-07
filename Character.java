@@ -63,20 +63,29 @@ abstract class Character {
     }
 
     protected int getArmorDefense() {
-        // Implement logic to calculate defense from equipped armor
         return 0;
     }
 
     protected int getAttackDamage() {
-        // Implement logic to calculate attack damage based on strength and equipped weapon
-        return strength;
+        // Get base damage from strength
+        int baseDamage = strength;
+
+        // Add weapon damage if character has one equipped
+        if (this instanceof Hero) {
+            Hero hero = (Hero) this;
+            Weapon equippedWeapon = hero.getEquippedWeapon();
+            if (equippedWeapon != null) {
+                baseDamage += equippedWeapon.getDamage();
+            }
+        }
+
+        return baseDamage;
     }
 
     public void levelUp() {
         level++;
         health = maxHealth;
         mana = maxMana;
-        // Increase stats based on character type
     }
 
     public void gainExperience(int exp) {
@@ -93,5 +102,17 @@ abstract class Character {
 
     public int getHealth() {
         return health;
+    }
+    public int getStrength() {
+        return strength;
+    }
+    public int getDexterity() {
+        return dexterity;
+    }
+    public int getExperience() {
+        return experience;
+    }
+    public int getAgility() {
+        return agility;
     }
 }

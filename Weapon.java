@@ -9,4 +9,5 @@ class Weapon extends Item {
     }
 
     public int getDamage() { return damage; }
+    public int getHands() { return hands; }
 }

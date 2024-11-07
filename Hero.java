@@ -1,7 +1,7 @@
 public abstract class Hero extends Character {
     protected int experience;
 
-    //Changed Code
+    //Code edited again here
 
     private Inventory inventory;
     private int gold;
@@ -75,16 +75,15 @@ public abstract class Hero extends Character {
     @Override
     public void levelUp() {
         super.levelUp();
-        // Increase stats based on hero type
     }
 
     public void castSpell(Spell spell, Monster target) {
         if (mana >= spell.getManaCost()) {
             mana -= spell.getManaCost();
-            int damage = spell.getDamage() + (int)(this.dexterity * 0.1); // Example spell damage calculation
+            int damage = spell.getDamage() + (int)(this.dexterity * 0.1); // Spell damage calculation
             target.takeDamage(damage);
             System.out.println(this.name + " casts " + spell.getName() + " on " + target.getName() + " for " + damage + " damage!");
-            applySpellEffect(spell, target); // Optional additional effect like lowering target's defense
+            applySpellEffect(spell, target);
         } else {
             System.out.println("Not enough mana to cast " + spell.getName() + ".");
         }

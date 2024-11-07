@@ -28,7 +28,6 @@ public class Battle {
             System.out.println(GREEN_TEXT + "Heroes win the battle!" + RESET_TEXT);
         } else {
             System.out.println(RED_TEXT + "Monsters have defeated the heroes! Game Over!" + RESET_TEXT);
-            //System.out.println("Thank you for playing Legends: Monsters and Heroes!");
             System.exit(0);
         }
     }
@@ -45,8 +44,6 @@ public class Battle {
         for (Hero hero : heroes) {
             if (hero.isAlive()) {
                 System.out.println(hero.getName() + "'s turn.");
-                // Add logic for hero to attack or use an item
-                // Display available actions
                 System.out.println("Choose an action:");
                 System.out.println("1. Attack");
                 System.out.println("2. Cast Spell");
@@ -189,16 +186,10 @@ public class Battle {
     private void monstersTurn() {
         for (Monster monster : monsters) {
             if (monster.isAlive()) {
-                // Add logic for monster to attack a random hero
+                //Monster attacks random hero
                 Hero target = selectRandomHero();
                 if (target != null) {
                     System.out.println(RED_TEXT + monster.getName() + " attacks " + target.getName() + "!" + RESET_TEXT);
-//                    for (int i = 0; i < heroes.size(); i++) {
-//                        Hero hero = heroes.get(i);
-//                        if (hero.isAlive()) {
-//                            System.out.println((i + 1) + ". " + hero.getName() + " (HP: " + hero.getHealth() + ")");
-//                        }
-//                    }
 
                     // Check if the hero dodges the attack
                     if (target.dodge()) {
@@ -242,6 +233,48 @@ public class Battle {
 
         // Select a random hero from the list of alive heroes
         return aliveHeroes.get(random.nextInt(aliveHeroes.size()));
+    }
+
+    public class InputValidator {
+        private static Scanner scanner = new Scanner(System.in);
+
+        public static int getIntInRange(int min, int max, String prompt) {
+            while (true) {
+                System.out.println(prompt);
+                try {
+                    String input = scanner.nextLine();
+                    int value = Integer.parseInt(input);
+                    if (value >= min && value <= max) {
+                        return value;
+                    }
+                    System.out.printf("Please enter a number between %d and %d.%n", min, max);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid number.");
+                }
+            }
+        }
+
+        public static char getCharChoice(String validChars, String prompt) {
+            while (true) {
+                System.out.println(prompt);
+                String input = scanner.nextLine().toUpperCase();
+                if (input.length() == 1 && validChars.toUpperCase().contains(input)) {
+                    return input.charAt(0);
+                }
+                System.out.println("Invalid input. Please enter one of: " + validChars);
+            }
+        }
+
+        public static String getNonEmptyString(String prompt) {
+            while (true) {
+                System.out.println(prompt);
+                String input = scanner.nextLine().trim();
+                if (!input.isEmpty()) {
+                    return input;
+                }
+                System.out.println("Input cannot be empty. Please try again.");
+            }
+        }
     }
 }
 
